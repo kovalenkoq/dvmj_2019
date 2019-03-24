@@ -1,0 +1,6 @@
+ kovalenko_prokhorov.log
+*.log
+*.gz
+*.pdf
+*.out
+*.aux
