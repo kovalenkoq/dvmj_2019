@@ -1,6 +1,7 @@
- kovalenko_prokhorov.log
+text.txt
 *.log
 *.gz
 *.pdf
 *.out
 *.aux
+*.DS_Store
