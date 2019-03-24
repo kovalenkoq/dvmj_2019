@@ -1,0 +1,484 @@
+\documentclass[10pt]{article}
+%\usepackage{../femj_jrn_ru}
+\usepackage{femj_ru}
+%\usepackage{amsmath,amsfonts,amssymb,amsbsy}
+%\usepackage{graphicx}
+%\usepackage{amsbib}
+\usepackage{mathrsfs}
+\usepackage{cite}
+\usepackage{graphicx,color}
+\usepackage{subfigure}
+\definecolor{red}{rgb}{0.8, .0, .0}
+\definecolor{blue}{rgb}{.0, 0.0, 0.9}
+\def\blue{\color{blue}}
+\def\red{\color{red}}
+
+
+\def\sgn{\mathrm{sgn}}
+
+\newtheorem{lemma}{Лемма}
+\newtheorem{theorem}{Теорема}
+\newtheorem{definition}{Определение}
+\newtheorem{corollary}{Следствие}
+\newtheorem{proposition}{Предложение}
+\newtheorem{problem}{Задача}
+\newtheorem{remark}{Замечание}
+\renewcommand{\abstractname}{*}
+
+
+\def\supvrai{\mathop{\fam0 ess\,sup}}
+\def\infvrai{\mathop{\fam0 ess\,inf}}
+\def\const{\fam0 const}
+\def\sign{\fam0  sign}
+\def\sgn{\fam0  sgn}
+\def\mes{\mathrm{mes}}
+\def\u{\mathbf{u}}
+\def\r{\mathbf{r}}
+\def\o{\mathbf{o}}
+
+\def\w{\boldsymbol{\omega}}
+\def\k{\mathbf{k}}
+\def\v{\mathbf{v}}
+\def\y{\mathbf{y}}
+\def\x{\mathbf{x}}
+\def\z{\mathbf{z}}
+\def\n{\mathbf{n}}
+\def\V{\mathbf{V}}
+\def\xii{\boldsymbol{\xi}}
+\def\zet{\boldsymbol{\zeta}}
+
+
+%Глубокоуважаемые авторы!
+
+% прежде чем подключать дополнительные пакеты TeXa и создавать новые окружения, пожалуйста, ознакомьтесь с уже предусмотренными в стилевом файле журнала
+
+% Используемые пакеты  перечислены в файле femj_ru.sty строки 7-30
+% Обозначения окружений журнала и дополнительные команды приведены в стилевом файле femj_ru.sty строки 38-80
+
+
+\def\sgn{\mathrm{sgn}}
+
+
+\begin{document}
+	
+	\Pages(1--10)
+	
+	\def\Im{\mathop{\mathrm{Im}}\nolimits}
+	
+	\summary Kan~V.\,A.,  Prokhorov~I.\,V., \author 	
+	Determination of a diffuse reflecting surface under pulsed irradiation\title	
+	An inverse problem of determining a diffusely reflecting surface under given functionals of the radiation flux density for a nonstationary radiation transfer equation is considered. Assuming the point pulsed source and the single scattering approximation, authors obtained the nonlinear differential equation. The solution has been obtained in a few quadratures to determine the profile of the Lambert surface. The computational experiments were carried out on test examples.
+	\keywords{radiation transfer equation, diffuse reflection, Lambert's cosine law, inverse problem.}
+	
+	\UDC{517.958}
+	\AMS{35Q20   +35Q60  }
+	
+
+	
+	\submitted{1 ноября 2018 г.}
+	
+	\title{Определение коэффициента донного рассеяния при многолучевом зондировании океана}
+	
+		\author[1,2]{Е.\,О.~Коваленко}{	Институт прикладной математики ДВО РАН, 690041, г.~Владивосток, ул.~Радио,~7,}{kovalenko.eo@dvfu.ru}
+	\author[1,2]{И.\,В.~Прохоров}{Дальневосточный федеральный университет, 690050, г.~Владивосток, ул.~Суханова,~8
+	}{prokhorov@iam.dvo.ru}
+
+	
+	\makeface
+	
+	\abstract Исследована обратная задача для нестационарного
+	уравнения переноса излучения,  заключающаяся в нахождении коэффициента донного рассеяния по данным многолучевого гидролокатора бокового обзора. В приближении однократного рассеяния   предложен приближенный способ нахождения коэффициента донного рассеяния. Проведен численный анализ обратной задачи для разного числа ракурсов зондирования и  при различной ширине приемных антенн. Продемонстрировано влияние объемного рассеяния на качество реконструкции   морского дна.  
+	
+	\keywords{ уравнение переноса излучения, донное рассеяние,  обратная задача}
+
+
+
+
+
+
+
+\section{Введение}
+
+Обратные задачи для кинетических уравнений  имеют многочисленные практические приложения. Это, прежде всего,   дистанционное  зондирование поверхности Земли,   фотометрия и гидролокация морского дна,  оптическая и рентгеновская  томография \cite{1,2,3,4,5,6,7,8,9,10}. В работе рассматривается обратная задача для нестационарного уравнения переноса излучения  в области с неизвестной границей, на которой   заданы условия   диффузного отражения по закону Ламберта. Требуется найти  границу при некотором условии переопределения решения начально-краевой задачи. Такие постановки задач возникают при  мониторинге земной поверхности и морского дна с помощью авиационных радиолокационных станций  и гидролокаторов бокового обзора. В  работе рассматривается упрощенная  двумерная модель локации ламбертовской кривой. Применение такой модели оправданно  для узкой в горизонтальной плоскости диаграммы направленности приемной антенны и при  небольшой скорости движения источника излучения --- в сравнении со скоростью распространения сигнала в среде   \cite{9}.
+
+В трехмерном случае эта обратная задача рассматривалась в работах \cite{9, 10}. Основное ограничение на поведение искомой поверхности в  \cite{9,10} было связано с малостью отклонения отражающей поверхности от некоторого среднего уровня.  При условиях, что  диаграмма направленности приемной антенны является узкой  в горизонтальной плоскости и учитывается только однократно рассеянное излучение, получена явная формула для решения обратной задачи. Проведен численный анализ влияния объемного рассеяния и ширины диаграммы направленности на качество реконструкции диффузно отражающей поверхности  \cite{9, 10}.
+
+Задачи определения  диффузно отражающих поверхностей для стационарных моделей переноса излучения  исследовались в работах \cite{1, 11}. В частности, в \cite{11} предложен метод  восстановления ламбертовской оптической кривой по двум ее изображениям и показана его устойчивость по отношению к малым отклонениям от ламбертовости и ошибкам измерений. Методы исследования обратной задачи,  используемые для стационарных и нестационарных моделей, несмотря на некоторые близкие аспекты, достаточно сильно отличаются друг от друга. В настоящей работе исследована обратная задача нестационарного уравнения переноса излучения и для определения формы ламбертовской кривой получено нелинейное дифференциальное уравнение, имеющее решение в квадратурах. На сравнительно простых тестовых примерах проведены  численные эксперименты.
+
+
+
+
+\section{Постановка задачи}
+
+В работе рассматривается  нестационарное уравнение переноса излучения следующего вида \cite{7,8,9, 12,13,14,15,16}:
+\begin{equation}
+\left (\frac{1}{c}\frac{\partial}{\partial t} + \k \cdot  \nabla_r + \mu \right) I(\r, \k, t) = \frac{\sigma}{4\pi} \int \limits_{\Omega } I(\r,\k', t)d \k' + J(\r,\k, t),
+\end{equation}
+где $\r \in G \subset \mathbb R^3$, $t \in [0, T]$ и волновой вектор $\k$ принадлежит единичной окружности $\Omega = \{ \k \in \mathbb R^3: |\k|=1\}.$ Функция $ I(\r, \k, t)$ интерпретируется как плотность потока энергии волны в момент времени $t$ в точке $\r$, распространяющейся в направлении  $\k$ со скоростью $c$.
+Величины $\mu$ и $\sigma$ имеют смысл коэффициентов затухания и рассеяния, а функция~$J$ описывает источники звукового поля.
+
+Неограниченная область $G$ представляет собой верхнее полупространство, ограниченное горизонтальной плоскостью $\gamma=\{\r=(r_1,r_2,r_3) \in \mathbb R^3 : r_3=-l\}$, $l>0$. 
+Присоединим к уравнению (1) начальные и граничные условия
+\begin{gather} \label{2}
+I^-(\r,\k, t)|_{t<0}  = 0, \qquad (\r,\k) \in G\times \Omega,
+\\
+\label{3}
+I^-(\y, \k, t) = \dfrac {\sigma_d(\r)}{\pi} \int \limits _{\Omega_+} |\n \cdot \k'| I^+(\y, \k', t)(\y, \k', t)d\k, \qquad (\y, \k, t) \in \Gamma^- .
+\end{gather}
+Здесь  $I^{\pm}(\y, \k, t) = \lim \limits_{\varepsilon \to -0}I(\y \pm \varepsilon \k, \k, t\pm \varepsilon/c) $,
+$$
+\Gamma^{\pm} = \{ (\y, \k, t) \in \gamma \times \Omega_{\pm} \times (0, T)\}, \quad \Omega_{\pm} = \{\k \in \Omega: \rm sgn(\n \cdot \k) = \pm 1\},
+$$
+где $\n=(0,0,-1)$ --- единичный вектор внешней нормали к границе области $G$. Условие  \eqref{3} означает, что  отражающие свойства дна определяются только диффузным отражением по закону Ламберта с коэффициентом отражения $\sigma_d(\r)$.
+
+Уравнение (1) с начальным и граничным условиями (2), (3) при заданных $\mu,\sigma$, $\sigma_d, J, c$ образуют начально-краевую задачу для нахождения неизвестной функции $I$ на множестве  $G \times \Omega \times (0,T)$
+
+
+Будем предполагать, что  функция $J$ описывает точечный импульсный источник звука, перемещающийся с постоянной скоростью $V$ в направлении оси $r_2$, следующего вида
+\begin{equation}
+J(\r,\k, t) = \delta (\r -\V t) \sum  \limits_{j=1}^{m}\delta (t-t_j), \qquad \V=(0,V,0),
+\end{equation}
+где $\delta$ --- дельта-функция Дирака.
+
+Дополним систему соотношений (1)--(3) следующими условиями
+\begin{equation}
+\label{add_eq}
+\int \limits_{\Omega} S_{i}(\k)  I^{+}(\V t, \k, t) d\k = P_{i}(\V t, t), \quad i=1,..., q,
+\end{equation}
+где $S_i(\k)$ отлична от нуля в некоторой области $\Omega_i \subset \Omega$.
+
+% $$
+% \{\k=(\cos(\alpha)\sin(\theta), \sin(\alpha)\sin(\theta),\cos(\theta)):   | \k - \k_i| <\delta \}.
+% $$
+
+Предметом исследования данной работы является следующая обратная задача: найти функцию $\sigma_d(\r)$ из соотношений (1)--(4) при заданных $\mu, \sigma, J, c$, $P_i, S_i$.
+
+Такая математическая постановка задачи возникает, например, при акустическом зондировании  морского дна гидролокатором бокового обзора, движущимся прямолинейно с постоянной скоростью $V$, озвучивая окружающее пространство импульсными сигналами. На носителе расположены   антенны, измеряющие  суммарную интенсивность $P_{i}(\V t,t)$ в секторе $\Omega_i$  в  момент времени $t$. 
+Если
+$q=2$ и  множества $\Omega_1=\{\k \in \Omega: k_1 < 0 \}$, $\Omega_2=\{\k \in \Omega: k_1 > 0 \}$, то мы имеем дело с простейшим случаем гидролокатора бокового обзора --- с одной  приемной антенной  по каждому борту ее носителя  [ ].
+
+
+
+
+
+\section{Приближение однократного рассеяния}
+
+Решение начально-краевой задачи \eqref{transfer_eq}--\eqref{3} эквивалентно решению следующего уравнения интегрального типа \cite{8,9,10,11,12,13}:
+\begin{multline}
+I(\r, \k, t) = I_0(\r,\k,t) + \\+ \dfrac{\sigma_d (\y)}{\pi}
+ \exp (-\mu d (\r, -\k,t)) \int \limits_{\Omega_+} |\n \cdot \k'|  I^+ \left( \y, \k', t - \frac{d(\r, -\k,t)}{c} \right) d \k' + \\+
+ \int \limits ^{d(\r, -\k,t)}_0 \exp (-\mu \tau) \dfrac{\sigma}{4\pi}  \int \limits_{\Omega } I\left(\r-\tau\k, \k', t - \frac{\tau}{c} \right) d \k' d\tau 
+\end{multline} 
+где 
+$$
+I_0(\r,\k,t)=\int \limits ^{d(\r, -\k, t)}_0 \exp (-\mu \tau) J \left(\r-\tau\k, \k, t - \frac{\tau}{c} \right) d\tau ,
+$$
+$\y=\r - d(\r, -\k,t)\k$, 
+$d(\r, -\k,t)=\min \{d(\r, -\k), c t\}$,  $d(\r, -\k)$ --- расстояние от точки $\r \in G$ в направлении $-\k$ до границы области $G$. Если $\y \not \in \partial G$, то второе слагаемое в уравнении (6) отсутствует.
+
+
+Возьмем в качестве нулевого приближения для решения уравнения (6) функцию
+$I_0$
+и построим процесс простых итераций. На первом шаге итерационного процесса для решения начально-краевой задачи (1)--(3) получим, так называемое, приближение однократного рассеяния
+\begin{multline}
+I(\r, \k, t) = I_0(\r,\k,t) + \dfrac{\sigma_d (\y)}{\pi}
+\exp (-\mu d (\r, -\k,t)) \times \\ \times \int \limits_{\Omega_+} |\n \cdot \k'|  \int \limits ^{d(\y, -\k', t)}_0 \exp (-\mu \tau) J \left(\y-\tau\k', \k', t -  \frac{d(\r, -\k,t)}{c} -\frac{\tau}{c} \right) d\tau d \k' + \\
+\int \limits ^{d(\r, -\k,t)}_0 \exp (-\mu \tau) \dfrac{\sigma}{4\pi}  \int \limits_{\Omega }  \int \limits ^{d(\r -\tau\k, -\k', t-\tau/c)}_0 \exp (-\mu \tau')  \times \\ \times J \left(\r-\tau\k - \tau' \k', \k', t -  \frac{\tau+\tau'}{c} \right) d\tau' d \k' d\tau.
+\end{multline}
+В последнем соотношении сделаем замены переменных: $\x=\y - \tau\k'$ --- в первом интеграле, и $\x'=\r - \tau'\k'$ --- во втором интеграле. Так как 
+$$
+d\tau d \k'= \dfrac{d\x}{|\y -\x|^2}, \quad d\tau' d \k'= \dfrac{d\x'}{|\r-\x'|^2},
+$$
+то из (7) получаем
+\begin{multline}
+I(\r, \k, t) = I_0(\r,\k,t) + \dfrac{\sigma_d (\y)}{\pi}
+\exp (-\mu d (\r, -\k,t)) \times \\ \times \int \limits_{G(\y)} \left |\n (\y) \cdot \frac{\y-\x}{|\y-\x|} \right| \exp (-\mu |\x-\y|)   J \left( \x, \frac{\y-\x}{|\y-\x|}, t - \frac{d(\r, -\k)}{c} - \frac{|\y-\x|}{c} \right)\frac{d\x}{|\y-\x|^2}
+\\+
+\int \limits ^{d(\r, -\k,t)}_0 \exp (-\mu \tau) \dfrac{\sigma}{4\pi}  \int \limits_{G(\r-\tau\k)}
+\exp (-\mu |\r-\x'|)   \times \\ \times J \left( \x' -\tau\k, \frac{\r-\x'}{|\r-\x'|}, t - \frac{\tau}{c} - \frac{|\r-\x'|}{c} \right)\frac{d\x' d\tau}{|\r-\x'|^2} ,
+\end{multline}
+где $G(\y)$ пересечение области $G$ с шаром с центром в точке $\y$ и радиусом $ct$.
+\begin{multline}
+i_2=   \sum  \limits_{j=1}^{m}\delta (t-t_j) \int \limits ^{d(\r, -\k,t)}_0 \exp (-\mu \tau) \dfrac{\sigma}{4\pi}  \int \limits_{G(\r-\tau\k)}
+\exp (-\mu |\r-\x'|)   \times \\ \times 
+\delta (\x' -\V t
+)
+J \left( \x' -\tau\k, \frac{\r-\x'}{|\r-\x'|}, t - \frac{\tau}{c} - \frac{|\r-\x'|}{c} \right)\frac{d\x' d\tau}{|\r-\x'|^2} =\\ =
+\end{multline}
+
+
+\section{Исследование  обратной  задачи}
+Принимая во внимание ограничение  (5) для функции $J$ и <<звездность>> области $G$ относительно начала координат, перепишем соотношение (10) в точке $\r=\o$:
+\begin{multline}
+I^+(\o, \k, t) =
+2 \exp \left(-\mu d(\o, -\k) \right) \int \limits_{G(\y)} |\n (\y) \cdot \frac{\y-\x}{|\y-\x|}| \exp (-\mu |\y-\x|)  \times \\
+\times \delta \left( \x \right) \delta \left (t - \frac{d(\o, -\k)}{c} - \frac{|\y-\r'|}{c} \right) \frac{d\r'}{|\y-\r'|} = \\=
+\frac{2}{|\y|} \exp \left(-\mu ( d(\o, -\k)+|\y| \right)  \left |\n (\y) \cdot \frac{\y}{|\y|}\right|   \delta \left (t - \frac{d(\o, -\k)}{c} - \frac{|\y|}{c} \right) = \\ =
+\frac{2}{d(\o, -\k)} \exp \left(-2 \mu  d(\o, -\k) \right)  \left |\n (-d(\o, -\k)\k) \cdot \k\right|   \delta \left (t - 2\frac{d(\o, -\k)}{c}  \right).
+\end{multline}
+Подставим (11) в условие (4):
+\begin{equation}
+\begin{gathered}
+P_{\pm}(t)=  \int \limits_{\Omega} S_{\pm}(\k) I^+ (\o, \k, t ) d\k
+ =
+  \int \limits_{\Omega} S_{\pm} (\k)
+  \frac{2}{d(\o, -\k)}\exp \left(-2\mu  d(\o, -\k) \right)\times \\ \times   \left |\n (- d(\o, -\k)\k) \cdot \k \right| \times
+   \delta \left (t - 2\frac{d(\o, -\k)}{c} \right)
+   d\k.
+\end{gathered}
+\end{equation}
+Пусть $\k=(k_1,k_2)=(-\sin\varphi, \cos\varphi)$, тогда, учитывая  параметризацию  кривой $\gamma$ ($\rho(\varphi)= d(\o, -\k)$), из (12) получаем
+\begin{equation}
+\begin{gathered}
+P_{\pm}(t)=  \int \limits_{\underline{\varphi}}^{\overline{\varphi}} S_{\pm}(\varphi)   I^+ (\o, \k(\varphi), t ) d \varphi
+=
+\int \limits_{\underline{\varphi}}^{\overline{\varphi}} S_{\pm}(\varphi)
+\frac{2}{\rho(\varphi)}\exp \left(-2\mu \rho(\varphi) \right)\times \\ \times   \left |\n (\varphi) \cdot \k(\varphi) \right| \times
+\delta \left (t - 2\frac{\rho(\varphi)}{c} \right) d\varphi.
+\end{gathered}
+\end{equation}
+Учитывая, что
+$$
+\left |\n (\varphi) \cdot \k(\varphi) \right| =\frac{\rho(\varphi)|\rho'(\varphi)|}{\sqrt{\rho'^2(\varphi)+\rho^2(\varphi)}},
+$$
+из (13) получаем
+\begin{equation}
+P_{\pm}(t)=
+2\int \limits_{\underline{\varphi}}^{\overline{\varphi}} S_{\pm}(\varphi)
+\exp \left(- 2 \mu \rho(\varphi) \right)  \frac{|\rho'(\varphi)|}{\sqrt{\rho'^2(\varphi)+\rho^2(\varphi)}}
+\delta \left (t - 2\frac{\rho(\varphi)}{c} \right)
+d\varphi.
+\end{equation}
+Согласно предположениям пункта 2, функция $\rho(\varphi)$ монотонна и дифференцируема на интервалах $(\underline{\varphi},\pi)$ и $(\pi,\overline{\varphi})$. Следовательно, на  интервале  $(\underline{\varphi},\pi)$ она имеет обратную функцию $\varphi_{-}$, а на интервале  $(\pi,\overline{\varphi})$ --- обратную функцию $\varphi_{+}$.
+Если диаграмма направленности  $S_{+}(\varphi)=1$ при $\varphi\in (\pi,\overline{\varphi})$ , а $S_{-}(\varphi)=1$ при $\varphi\in (\underline{\varphi},\pi)$, то из (14) находим
+\begin{equation}
+\label{intensive}
+P_{\pm}(t)=
+\frac{c
+	\exp (-   \mu c t)}{\sqrt{1/\varphi'^2_{\pm}(c t /2) +(c t /2)^2}}.
+\end{equation}
+Возвращаясь к обозначению $\rho=c t/2$\, ($ t =2 \rho/c $), из (15) получаем
+\begin{equation}
+\frac{P^2_{\pm}(2\rho/c)}{c^2 	\exp (-  4 \mu \rho) -  \rho^2 P^2_{\pm}(2\rho/c) } = \varphi'^2_{\pm}(\rho).
+\end{equation}
+Так как $\rho(\pi) =l$, то $\varphi_{\pm}(l)=\pi$, и решение дифференциального уравнения (16) можно записать в виде
+\begin{equation}
+\label{final_phi}
+\varphi_ {\pm}(\rho) = \pi {\pm} \int \limits_l^{\rho} \frac{P_{\pm}(2\tau/c) d\tau }{\sqrt{c^2 	\exp (-  4 \mu \tau) -  \tau^2 P^2_{\pm}(2\tau/c)} }.
+\end{equation}
+Знаки $\pm$  в выражении  (17) выбраны в соответствии  с монотонным убыванием функции $\varphi_ {-}(\rho)$ на интервале $(\underline{\varphi},\pi)$ и монотонным возрастанием функции $\varphi_ {+}(\rho)$  на интервале $(\pi,\overline{\varphi})$.
+
+
+\section{Численные эксперименты}
+
+В заключительном разделе на ряде тестовых примеров мы проведем анализ  численного решения обратной задачи \eqref{transfer_eq}--\eqref{add_eq}. Как было показано в разделе 4,  решение обратной задачи сводится к вычислению интегралов (17). В приложениях, например, в задачах зондирования донной поверхности,   мы имеем дело с дискретным множеством измеренных значений функций $P_{\pm}(\rho/c),\, \rho=\rho_i,\, i=0,...,n$. Учитывая это  замечание, из соотношений (17)  получаем рекуррентные приближенные  формулы для определения $\varphi^i _{\pm}$ при заданных $P_{\pm}(\rho_i/c)$ :
+\begin{multline}
+\varphi^{i+1}_{\pm}= \varphi^i _{\pm}  \pm \int \limits_{\rho_{i}}^{\rho_{i+1}} \frac{P_{\pm}(2\tau/c) d\tau}{\sqrt{c^2 	
+		\exp (-  4 \mu \tau) - \tau^2 P^2_{\pm}(2\tau/c) }}
+\approx  \\ \approx
+\varphi^i_{\pm}   \pm \frac{P_{\pm}(2\rho_i/c) (\rho_{i+1}-\rho_i) }{\sqrt{c^2 	\exp (-  4 \mu \rho_i) -  \rho_i^2  P^2_{\pm}(2\rho_i/c) }}, \qquad  i=0,...,n-1,
+\end{multline}
+где $\varphi^0_{\pm}=\pi$, $\rho_0=l$  и для аппроксимации интеграла по элементарному отрезку использована  формула прямоугольников. Также будем рассматривать аппроксимацию по формуле трапеций
+\begin{multline}
+\varphi^{i+1}_{\pm}= \varphi^i _{\pm}  \pm \left( \frac{P_{\pm}(2\rho_i/c) (\rho_{i+1}-\rho_i) }{\sqrt{c^2 	\exp (-  4 \mu \rho_i) -  \rho_i^2 P^2_{\pm}(2\rho_i/c) }} +\right . \\
++\left.
+\frac{P_{\pm}(2\rho_{i+1}/c) (\rho_{i+1}-\rho_i) }{\sqrt{c^2 	\exp (-  4 \mu \rho_{i+1}) -  \rho_{i+1}^2 P^2_{\pm}(2\rho_{i+1}/c) }}\right)/2,  \qquad  i=0,...,n-1.
+\end{multline}
+ При проведении  вычислительных экспериментов предполагается, что  расстояние между источником и донной поверхностью в  направлении $\k=(0,-1)$ равно 30 метрам, то есть $\rho_0=l  = 30$.  Скорость распространения звука полагается постоянной во всей области зондирования $c = 1500$м/сек,  коэффициент затухания и донного рассеяния имеют значения  $\mu = 0.018$м$^{-1}$, $\sigma_d = 1$. Облучение поверхности осуществляется  c дальностью зондирования $\rho_n=300$м  с шагом дискретизации $\Delta\rho=\rho_{i+1}-\rho_i$, который варьируется на промежутке $[0.004, 0.4]$м.
+
+
+
+
+В первом численном эксперименте $\gamma$ представлет собой горизонтальную прямую (плоское дно) и задается в  следующем виде:
+\begin{equation}
+\label{line_test}
+	\begin{cases}
+		r_1 = -\rho \sin\varphi, \\
+		r_2 = - l.
+	\end{cases}
+\end{equation}
+
+
+Как видно из риc.~2a и риc.~2b, погрешность формул (18) не превосходит значений $47,5\%$ и $15\%$ при $\Delta\rho = 0.4$ и $\Delta\rho = 0.04$ соотвественно,  а вычисления по формулам (19) приводят к ошибке, не превосходящей значений $3.6\%$ и $1\%$ соотвественно.
+
+
+
+ В следующем тесте кривая  $\gamma$ задается  следующими параметрическим уравнениями:
+\begin{equation}
+	\begin{cases}
+	r_1 = -\rho \sin\varphi, \\
+	r_2 = - l^2 / \rho.
+	\end{cases}
+\end{equation}
+
+
+
+
+На рис.~3 для различной частоты дискретизации представлено восстановление  кривой $\gamma$,  описываемой параметрическим уравнениями (21). Как и следовало ожидать,  точность восстановления кривой   возрастает с уменьшением шага дискретизации. Ориентируясь на приложения теоретических результатов к задачам гидролокации,  отметим следующее. Разрешение по дистанции гидролокатора бокового обзора, работающего на частотах порядка $100$-$600$кГц,  составляет величины порядка  $1$-$5$см  \cite{17}. Поэтому  для практики представляют интерес графики, приведенные на рис. 2b, 2c. Максимальная относительная ошибка реконструкции кривой $\gamma$ по формулам (19) при $\Delta\rho = 0.04$м  не превосходит $17.5\%$, а при $\Delta\rho = 0.01$м --- не превосходит  $8.7\%$.
+ При повышении разрешающей способности необходимо повышать частоту зондирующего излучения.
+ Повешение частоты излучения приводит к росту коэффициента ослабления звука и уменьшению дальности зондирования \cite{17}.
+
+ Представляет несомненный  интерес исследование  устойчивости решения обратной задачи при возмущении исходных данных. Предварительные исследования показали, что точность и даже сама возможность восстановления кривой $\gamma$ определяется не только уровнем шума   при возмущении функций $P_{\pm}$, но и величиной $\rho'(\varphi)$. Решение обратной задачи особенно чувствительно к ошибкам в исходных данных, если     величина производной функции $\rho(\varphi)$  на части кривой стремится к нулю. В дальнейшем мы также намерены исследовать задачу нахождения диффузно отражающей кривой в  рассеивающей среде $(\sigma \neq 0)$. Детальный анализ таких и подобных задач будет  предметом наших дальнейших публикаций.
+
+
+ЭКСПЕРИМЕНТЫ
+
+Эксперимент 1
+
+В данном эксперименте рассматривалось изменение качества изображения в зависимости от количества приемных антенн. 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/exp1/1}
+	\caption{}
+	\label{fig:fig1}
+\end{figure}
+
+\begin{figure}[h!]\center
+	\begin{tabular}{cccc}
+		\includegraphics[width=0.2\linewidth]{img/exp1/1.jpg}&
+		\includegraphics[width=0.2\linewidth]{img/exp1/3.jpg}&
+		\includegraphics[width=0.2\linewidth]{img/exp1/5.jpg}&
+		\includegraphics[width=0.2\linewidth]{img/exp1/7.jpg}\\
+		1 & 3 & 5 & 15\\
+		\includegraphics[width=0.2\linewidth]{img/exp1/9.jpg}&
+		\includegraphics[width=0.2\linewidth]{img/exp1/15.jpg}&
+		\includegraphics[width=0.2\linewidth]{img/exp1/21.jpg}&
+		\includegraphics[width=0.2\linewidth]{img/exp1/25.jpg}\\
+		25 & 35 & 41 & 51
+	\end{tabular}
+	\caption{}
+	\label{ris:desc1}
+\end{figure}
+
+Эксперимент 2
+
+В данном эксперименте рассматривалось изменение качества изображения в зависимости от количества приемных антенн. 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/exp2/fig.png}
+	\caption{}
+	\label{fig:fig1}
+\end{figure}
+
+\begin{figure}[h!]\center%---------------FOUTY DEGREE---------------
+	\begin{tabular}{cccc}
+		\includegraphics[width=0.2\linewidth]{img/exp2/1.jpg}&
+		\includegraphics[width=0.2\linewidth]{img/exp2/3.jpg}&
+		\includegraphics[width=0.2\linewidth]{img/exp2/5.jpg}&
+		\includegraphics[width=0.2\linewidth]{img/exp2/15.jpg}\\
+		1 & 3 & 5 & 15\\
+		\includegraphics[width=0.2\linewidth]{img/exp2/25.jpg}&
+		\includegraphics[width=0.2\linewidth]{img/exp2/35.jpg}&
+		\includegraphics[width=0.2\linewidth]{img/exp2/41.jpg}&
+		\includegraphics[width=0.2\linewidth]{img/exp2/51.jpg}\\
+		25 & 35 & 41 & 51
+	\end{tabular}
+	\caption{}
+	\label{ris:desc6}
+\end{figure}
+
+
+
+
+\begin{thebibliography}{1}
+	
+
+\RBibitem{1} 
+\by В.\,Р.~Кирейтов  \book Обратные задачи фотометрии  \publaddr Новосибирск \publ  ВЦ СО АН СССР \yr 1983
+
+\RBibitem{2}  
+\by  Р.\,Д.~Урик \book Основы гидроакустики \publaddr    Л. \publ  Судостроение \yr 1978
+
+\RBibitem{3}  
+\by А.\,В.~Богородский, Г.\,В.~Яковлев, Е.\,А.~Корепин, А.\,К.~Должиков \book Гидроакустическая
+	техника исследования и освоения океана  \publaddr Л. \publ  Гидрометеоиздат \yr 1984
+	
+\RBibitem{4} 
+\by Д.\,С.~Аниконов, А.\,Е.~Ковтанюк, И.\,В.~Прохоров \book Использование уравнения переноса в  томографии \publaddr М. \publ Логос \yr 2000
+	
+\RBibitem{5}  
+\by Yu.\,E.~ Anikonov \book Inverse Problems for Kinetic and Other Evolution Equations \publaddr  Utrecht  \publ VSP \yr 2001
+
+\RBibitem{6}  
+\by  В.\,В.~Тучин \book  Оптика биологических тканей. Методы рассеяния света в медицинской диагностике \publaddr  M. \publ Физматлит \yr  2013
+	
+\RBibitem{7}
+\by И.\,В.~Прохоров, В.\,В.~Золотарев, И.\,Б.~Агафонов
+\paper Задача акустического зондирования во флуктуирующем океане
+\jour Дальневосточный математический журнал
+\yr 2011
+\vol 11
+\issue 1
+\pages 76--87
+
+
+\RBibitem{8} \by И.\,В.~Прохоров, А.\,А.~Сущенко \paper
+Исследование задачи акустического зондирования морского дна
+методами теории переноса излучения \jour Акустический журнал \yr
+2015 \vol 61 \issue 3 \pages 400--408
+
+
+\RBibitem{9}
+\by И.\,В.~Прохоров, А.\,А.~Сущенко, В.\,А.~Кан
+\paper Об одной задаче определения рельефа дна флуктуирующего океана
+\jour Сиб. журн. индустр. матем.
+\yr 2015
+\vol 18
+\issue 2
+\pages 99--110
+
+
+
+\Bibitem{10} \by 	V.\,A.~Kan, I.\,V.~Prokhorov, A.\,A.~Sushchenko
+\paper Determining the bottom surface according to data of side-scan sonars	
+\jour Proceedings of SPIE - The International Society for Optical Engineering
+\yr 2016
+\vol 10035
+\papernumber 1003518
+
+
+\RBibitem{11}
+	\by В.\,А.~Шарафутдинов \paper О восстановлении ламбертовской оптической кривой по двум ее изображениям
+	\jour 	Доклады АН  \yr 1979 \vol  249 \issue 3 \pages 565--568
+	
+
+		
+
+	\RBibitem{12}
+	\by И.\,В.~Прохоров, А.\,А.~Сущенко
+	\paper О корректности задачи Коши для уравнения переноса излучения с~френелевскими условиями сопряжения
+	\jour  Сибирский математический журнал
+	\yr 2015
+	\vol 56
+	\issue 4
+	\pages 922--933
+	
+	\RBibitem{13}
+	\by И.\,В.~Прохоров, А.\,А.~Сущенко, А.~Ким \paper Начально-краевая задача для уравнения переноса излучения с диффузными условиями сопряжения \jour
+	Сибирский журнал индустриальной математики  \yr 2017 \vol 20 \issue 1 \pages 75---85
+	
+	\RBibitem{14}
+	\by И.\,В.~Прохоров, А.\,А.~Сущенко \paper Задача Коши для уравнения переноса излучения в неограниченной среде
+	\jour
+	Дальневосточный математический журнал  \yr 2018 \vol 18 \issue 1 \pages 101---111
+	
+\Bibitem{15}
+\by  A.\,A.~Amosov \paper Initial-Boundary Value Problem for the Non-Stationary Radiative Transfer Equation with Fresnel Reflection and Refraction Conditions \jour Journal of Mathematical Sciences \vol 231 \issue 3 \yr  2018  \pages  279--337
+
+\Bibitem{16}
+\by  A.\,A.~Amosov \paper Initial-Boundary Value Problem for the Nonstationary Radiative Transfer Equation with Diffuse Reflection and Refraction Conditions  \jour Journal of Mathematical Sciences \vol 235 \issue 2 \yr  2018  \pages 117--137
+
+	
+\RBibitem{17}
+\by В.~Лекомцев
+\paper Гидроакустические средства визуализации для необитаемых подводных аппаратов
+\jour Современные технологии автоматизации \yr 2013
+\issue 3
+\pages 78--82
+
+	
+	
+\end{thebibliography}
+\EndArticle
+
+\end{document}
